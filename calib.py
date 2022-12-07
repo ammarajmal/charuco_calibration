@@ -189,10 +189,10 @@ def write_images():
 if __name__ == "__main__":
 
     # save_chessboard(board, aruco_dict)
-    # detect_charuco_corners(board, aruco_dict)
-    allCorners, allIds, imSize = read_chessboards()
+    detect_charuco_corners(board, aruco_dict)
+    # allCorners, allIds, imSize = read_chessboards()
     
-    calibrate_camera(allCorners, allIds, imSize)
+    # calibrate_camera(allCorners, allIds, imSize)
     
     print(allCorners)
     print(allIds)
