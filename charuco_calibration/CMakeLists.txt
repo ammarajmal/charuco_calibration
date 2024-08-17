@@ -1,4 +1,6 @@
 cmake_minimum_required(VERSION 2.8.3)
+# set the policy to CMP0048
+cmake_policy(SET CMP0048 NEW)
 project(charuco_calibration)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
@@ -16,7 +18,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
-find_package(OpenCV 3 REQUIRED COMPONENTS
+find_package(OpenCV REQUIRED COMPONENTS
   aruco
   calib3d
   core
