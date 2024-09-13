@@ -36,7 +36,7 @@ detector_parameters:
   minMarkerDistanceRate: 0.05
 # Corner refinement method: 0 for CORNER_REFINE_NONE, 1 for CORNER_REFINE_SUBPIX,
 # 2 for CORNER_REFINE_CONTOUR, 3 for CONTOUR_REFINE_APRILTAG
-  cornerRefinementMethod: 2
+  cornerRefinementMethod: 3
   cornerRefinementWinSize: 5
   cornerRefinementMaxIterations: 30
   cornerRefinementMinAccuracy: 0.1

@@ -1,0 +1,44 @@
+<launch>
+    <env name="ROSCONSOLE_FORMAT" value="[${severity}] [${time}]: ${logger}: ${message}"/>
+
+    <node pkg="nodelet" type="nodelet" name="nodelet_manager" args="manager" output="screen"/>
+
+    <node pkg="nodelet" type="nodelet" name="cv_camera" args="load cv_camera/CvCameraNodelet nodelet_manager" output="screen">
+        <param name="device_id" value="_cam1"/>
+    </node>
+
+    <node pkg="charuco_calibration" name="charuco_calibration" type="charuco_calibration_node" output="screen">
+        <!-- Image source. The node subscribes to image topic, remap your topic to it -->
+        <remap from="image" to="cv_camera/image_raw"/>
+        <!-- Chessboard square size, in meters -->
+        <param name="square_length" value="0.007" /> <!-- 7mm -->
+        <!-- ArUco marker size, in meters -->
+        <param name="marker_length" value="0.005"/> <!-- 5mm -->
+        <!-- Number of squares in the X direction (Columns) -->
+        <param name="squares_x" value="9"/>
+        <!-- Number of squares in the Y direction (Rows) -->
+        <param name="squares_y" value="5"/>
+        <!-- Dictionary ID used in calibration -->
+        <param name="dictionary_id" value="5"/>
+        <!-- Board image width, in pixels -->
+        <param name="board_image_width" value="3507"/>
+        <!-- Board image height, in pixels -->
+        <param name="board_image_height" value="2481"/>
+        <!-- Board image border, in pixels -->
+        <param name="board_image_border" value="100"/>
+        <!-- Should we perform ArUco detection refinement? -->
+        <param name="perform_refinement" value="true"/>
+        <!-- Should we draw points where we've already detected a marker corner? -->
+        <param name="draw_historical_markers" value="true"/>
+        <!-- Calibration flags bitmask -->
+        <!-- See https://docs.opencv.org/3.4.9/d9/d0c/group__calib3d.html#ggae448fb075a142f17c407d40b04321795a6eedf3c8312d4b29edfe0a434722e2ef for values and details -->
+        <!-- NOTE: This value is overridden by calibration_flags section -->
+        <!-- <param name="calibration_flags_mask" value="16384"/> --> <!-- cv::CALIB_RATIONAL_MODEL -->
+        <!-- Should we save the images used in calibration? -->
+        <param name="save_images" value="true"/>
+        <!-- Calibration file name -->
+        <param name="output_file" value="calibration.yaml"/>
+        <!-- Load ArUco detector parameters -->
+        <rosparam command="load" file="$(find charuco_calibration)/launch/calibration_params.yaml"/>
+    </node>
+</launch>
