@@ -4,8 +4,8 @@
     <arg name="device_ip" default="192.168.1.201"/>
     <arg name="camera_fps" default="60"/>
     <arg name="camera_calib" default="file://$(find sony_cam)/config/$(arg camera_name)_info.yaml"/>
-    <arg name="image_width" default="640"/>
-    <arg name="image_height" default="480"/>
+    <arg name="image_width" default="1280"/>  <!-- Updated width -->
+    <arg name="image_height" default="720"/>   <!-- Updated height -->
 
     <node name="$(arg camera_name)"
         pkg="sony_cam"
@@ -40,7 +40,7 @@
         <!-- Board image border, in pixels -->
         <param name="board_image_border" value="100"/> <!-- Border in pixels -->
         <!-- Should we perform ArUco detection refinement? -->
-        <param name="perform_refinement" value="false"/>
+        <param name="perform_refinement" value="true"/>
         <!-- Should we draw points where we've already detected a marker corner? -->
         <param name="draw_historical_markers" value="true"/>
         <!-- Calibration flags bitmask -->
