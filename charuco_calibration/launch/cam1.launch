@@ -1,7 +1,7 @@
 <launch>
     <arg name="camera_name" default="sony_cam1"/>
     <arg name="camera_id" default="_cam1"/>
-    <arg name="device_ip" default="192.168.1.201"/>
+    <arg name="device_ip" default="192.168.1.11"/>
     <arg name="camera_fps" default="60"/>
     <arg name="camera_calib" default="file://$(find sony_cam)/config/$(arg camera_name)_info.yaml"/>
     <arg name="image_width" default="640"/>
@@ -24,15 +24,15 @@
         <!-- Image source. The node subscribes to image topic, remap your topic to it -->
         <remap from="image" to="$(arg camera_name)/image_raw"/>
         <!-- Chessboard square size, in meters -->
-        <param name="square_length" value="0.006" /> <!-- 6mm -->
+        <param name="square_length" value="0.0117" /> 
         <!-- ArUco marker size, in meters -->
-        <param name="marker_length" value="0.004"/> <!-- 4mm -->
+        <param name="marker_length" value="0.0087"/> 
         <!-- Number of squares in the X direction (Columns) -->
-        <param name="squares_x" value="8"/> <!-- 8 columns -->
+        <param name="squares_x" value="11"/> <!-- 9 columns -->
         <!-- Number of squares in the Y direction (Rows) -->
-        <param name="squares_y" value="5"/> <!-- 6 rows -->
+        <param name="squares_y" value="8"/> <!-- 7 rows -->
         <!-- Dictionary ID used in calibration -->
-        <param name="dictionary_id" value="5"/> <!-- 5x5 dictionary -->
+        <param name="dictionary_id" value="13"/> <!-- 5x5 dictionary -->
         <!-- Board image width, in pixels -->
         <param name="board_image_width" value="7016"/> <!-- 297mm at 600 DPI -->
         <!-- Board image height, in pixels -->
@@ -40,7 +40,7 @@
         <!-- Board image border, in pixels -->
         <param name="board_image_border" value="100"/> <!-- Border in pixels -->
         <!-- Should we perform ArUco detection refinement? -->
-        <param name="perform_refinement" value="false"/>
+        <param name="perform_refinement" value="true"/>
         <!-- Should we draw points where we've already detected a marker corner? -->
         <param name="draw_historical_markers" value="true"/>
         <!-- Calibration flags bitmask -->

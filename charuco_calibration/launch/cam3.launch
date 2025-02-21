@@ -20,19 +20,19 @@
         <param name="camera_info_url" value="$(arg camera_calib)"/>
     </node>
 
-    <node pkg="charuco_calibration" name="charuco_calibration" type="charuco_calibration_node" output="screen">
+        <node pkg="charuco_calibration" name="charuco_calibration" type="charuco_calibration_node" output="screen">
         <!-- Image source. The node subscribes to image topic, remap your topic to it -->
         <remap from="image" to="$(arg camera_name)/image_raw"/>
         <!-- Chessboard square size, in meters -->
-        <param name="square_length" value="0.006" /> <!-- 6mm -->
+        <param name="square_length" value="0.0117" /> 
         <!-- ArUco marker size, in meters -->
-        <param name="marker_length" value="0.004"/> <!-- 4mm -->
+        <param name="marker_length" value="0.0087"/> 
         <!-- Number of squares in the X direction (Columns) -->
-        <param name="squares_x" value="8"/> <!-- 8 columns -->
+        <param name="squares_x" value="11"/> <!-- 9 columns -->
         <!-- Number of squares in the Y direction (Rows) -->
-        <param name="squares_y" value="5"/> <!-- 5 rows -->
+        <param name="squares_y" value="8"/> <!-- 7 rows -->
         <!-- Dictionary ID used in calibration -->
-        <param name="dictionary_id" value="5"/> <!-- 5x5 dictionary -->
+        <param name="dictionary_id" value="13"/> <!-- 5x5 dictionary -->
         <!-- Board image width, in pixels -->
         <param name="board_image_width" value="7016"/> <!-- 297mm at 600 DPI -->
         <!-- Board image height, in pixels -->
