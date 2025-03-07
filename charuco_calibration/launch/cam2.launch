@@ -1,7 +1,7 @@
 <launch>
     <arg name="camera_name" default="sony_cam2"/>
     <arg name="camera_id" default="_cam2"/>
-    <arg name="device_ip" default="192.168.1.12"/>
+    <arg name="device_ip" default="192.168.1.203"/>
     <arg name="camera_fps" default="60"/>
     <arg name="camera_calib" default="file://$(find sony_cam)/config/$(arg camera_name)_info.yaml"/>
     <arg name="image_width" default="640"/>
@@ -20,19 +20,19 @@
         <param name="camera_info_url" value="$(arg camera_calib)"/>
     </node>
 
-    <node pkg="charuco_calibration" name="charuco_calibration" type="charuco_calibration_node" output="screen">
+        <node pkg="charuco_calibration" name="charuco_calibration" type="charuco_calibration_node" output="screen">
         <!-- Image source. The node subscribes to image topic, remap your topic to it -->
         <remap from="image" to="$(arg camera_name)/image_raw"/>
         <!-- Chessboard square size, in meters -->
-        <param name="square_length" value="0.0117" /> 
+        <param name="square_length" value="0.0117" />
         <!-- ArUco marker size, in meters -->
-        <param name="marker_length" value="0.0087"/> 
+        <param name="marker_length" value="0.0087"/>
         <!-- Number of squares in the X direction (Columns) -->
         <param name="squares_x" value="11"/> <!-- 9 columns -->
         <!-- Number of squares in the Y direction (Rows) -->
         <param name="squares_y" value="8"/> <!-- 7 rows -->
         <!-- Dictionary ID used in calibration -->
-        <param name="dictionary_id" value="13"/> <!-- 5x5 dictionary -->
+        <param name="dictionary_id" value="13"/>
         <!-- Board image width, in pixels -->
         <param name="board_image_width" value="7016"/> <!-- 297mm at 600 DPI -->
         <!-- Board image height, in pixels -->
