@@ -24,13 +24,13 @@
         <!-- Image source. The node subscribes to image topic, remap your topic to it -->
         <remap from="image" to="$(arg camera_name)/image_raw"/>
         <!-- Chessboard square size, in meters -->
-        <param name="square_length" value="0.0117" /> 
+        <param name="square_length" value="0.008" /> 
         <!-- ArUco marker size, in meters -->
-        <param name="marker_length" value="0.0087"/> 
+        <param name="marker_length" value="0.006"/> 
         <!-- Number of squares in the X direction (Columns) -->
-        <param name="squares_x" value="11"/> <!-- 9 columns -->
+        <param name="squares_x" value="9"/> <!-- 9 columns -->
         <!-- Number of squares in the Y direction (Rows) -->
-        <param name="squares_y" value="8"/> <!-- 7 rows -->
+        <param name="squares_y" value="6"/> <!-- 7 rows -->
         <!-- Dictionary ID used in calibration -->
         <param name="dictionary_id" value="13"/> <!-- 5x5 dictionary -->
         <!-- Board image width, in pixels -->
