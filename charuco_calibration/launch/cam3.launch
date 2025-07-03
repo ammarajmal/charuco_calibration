@@ -4,8 +4,8 @@
     <arg name="device_ip" default="192.168.1.203"/>
     <arg name="camera_fps" default="30"/>
     <arg name="camera_calib" default="file://$(find sony_cam)/config/$(arg camera_name)_info.yaml"/>
-    <arg name="image_width" default="1920"/>
-    <arg name="image_height" default="1080"/>
+    <arg name="image_width" default="1280"/>
+    <arg name="image_height" default="720"/>
 
     <node name="$(arg camera_name)"
         pkg="sony_cam"
