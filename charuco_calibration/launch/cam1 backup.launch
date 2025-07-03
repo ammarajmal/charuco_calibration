@@ -1,0 +1,57 @@
+<launch>
+    <arg name="camera_name" default="sony_cam1"/>
+    <arg name="camera_id" default="_cam1"/>
+    <arg name="device_ip" default="192.168.1.203"/>
+    <arg name="camera_fps" default="60"/>
+    <arg name="camera_calib" default="file://$(find sony_cam)/config/$(arg camera_name)_info.yaml"/>
+    <arg name="image_width" default="640"/>
+    <arg name="image_height" default="480"/>
+
+    <node name="$(arg camera_name)"
+        pkg="sony_cam"
+        type="sony_cam_node"
+        output="screen">
+        <param name="frame_rate" value="$(arg camera_fps)"/>
+        <param name="camera_name" value="$(arg camera_name)"/>
+        <param name="camera_frame_id" value="$(arg camera_name)"/>
+        <param name="device_id" value="/dev/video$(arg camera_id)"/>
+        <param name="image_width" value="$(arg image_width)"/>
+        <param name="image_height" value="$(arg image_height)"/>
+        <param name="camera_info_url" value="$(arg camera_calib)"/>
+    </node>
+
+        <node pkg="charuco_calibration" name="charuco_calibration" type="charuco_calibration_node" output="screen">
+        <!-- Image source. The node subscribes to image topic, remap your topic to it -->
+        <remap from="image" to="$(arg camera_name)/image_raw"/>
+        <!-- Chessboard square size, in meters -->
+        <param name="square_length" value="0.0117" />
+        <!-- ArUco marker size, in meters -->
+        <param name="marker_length" value="0.0087"/>
+        <!-- Number of squares in the X direction (Columns) -->
+        <param name="squares_x" value="11"/> <!-- 9 columns -->
+        <!-- Number of squares in the Y direction (Rows) -->
+        <param name="squares_y" value="8"/> <!-- 7 rows -->
+        <!-- Dictionary ID used in calibration -->
+        <param name="dictionary_id" value="13"/>
+        <!-- Board image width, in pixels -->
+        <param name="board_image_width" value="7016"/> <!-- 297mm at 600 DPI -->
+        <!-- Board image height, in pixels -->
+        <param name="board_image_height" value="4961"/> <!-- 210mm at 600 DPI -->
+        <!-- Board image border, in pixels -->
+        <param name="board_image_border" value="100"/> <!-- Border in pixels -->
+        <!-- Should we perform ArUco detection refinement? -->
+        <param name="perform_refinement" value="true"/>
+        <!-- Should we draw points where we've already detected a marker corner? -->
+        <param name="draw_historical_markers" value="true"/>
+        <!-- Calibration flags bitmask -->
+        <!-- See https://docs.opencv.org/3.4.9/d9/d0c/group__calib3d.html#ggae448fb075a142f17c407d40b04321795a6eedf3c8312d4b29edfe0a434722e2ef for values and details -->
+        <!-- NOTE: This value is overridden by calibration_flags section -->
+        <!-- <param name="calibration_flags_mask" value="16384"/> --> <!-- cv::CALIB_RATIONAL_MODEL -->
+        <!-- Should we save the images used in calibration? -->
+        <param name="save_images" value="true"/>
+        <!-- Calibration file name -->
+        <param name="output_file" value="calibration.yaml"/>
+        <!-- Load ArUco detector parameters -->
+        <rosparam command="load" file="$(find charuco_calibration)/launch/calibration_params.yaml"/>
+    </node>
+</launch>
