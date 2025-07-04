@@ -33,7 +33,7 @@
         <param name="perform_refinement" value="true"/>
         <param name="draw_historical_markers" value="true"/>
         <param name="save_images" value="true"/>
-        <param name="output_file" value="calibration.yaml"/>
+        <param name="output_file" value="cam3_calibration.yaml"/>
         <rosparam command="load" file="$(find charuco_calibration)/launch/calibration_params.yaml"/>
     </node>
 </launch>
